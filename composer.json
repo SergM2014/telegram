@@ -1,0 +1,5 @@
+{
+  "require": {
+    "tahrz/simple-telegram-bot": "^1.3"
+  }
+}
