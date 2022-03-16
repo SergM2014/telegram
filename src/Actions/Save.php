@@ -8,11 +8,11 @@ use Src\Interfaces\ActionsInterface;
 
 class Save extends MainController implements ActionsInterface
 {
-    public function handle(array $update): void
+    public function handle(object $dto): void
     {
-        (new PDORepository())->setUser($update);
+        (new PDORepository())->setUser($dto);
         $this->connectionService->withArrayResponse(
-            'sendMessage?chat_id=' . $update['message']['chat']['id'] . '&text=Saved!'
+            'sendMessage?chat_id=' . $dto->id . '&text=Saved!'
         );
     }
 }

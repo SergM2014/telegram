@@ -6,5 +6,5 @@ interface DBInterface
 {
     public function getUserByChatId(int $id): \stdClass|bool;
 
-    public function setUser(array $update): bool;
+    public function setUser(object $dto): bool;
 }

@@ -4,5 +4,5 @@ namespace Src\Interfaces;
 
 interface ActionsInterface
 {
-    public function handle(array $update): void;
+    public function handle(object $dto): void;
 }

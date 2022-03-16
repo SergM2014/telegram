@@ -41,15 +41,15 @@ class PDORepository implements DBInterface
         } catch(\PDOException $e) { die("Error:".$e->getMessage());}
     }
 
-    public function setUser(array $update): bool
+    public function setUser(object $dto): bool
     {
-        if(self::getUserByChatId($update['message']['chat']['id'])) return true;
+        if(self::getUserByChatId($dto->chatId)) return true;
 
         $sql = "INSERT INTO `users` (`chat_id`, `first_name`, `last_name`) VALUES (?, ?, ?)";
         $stmt = self::conn()->prepare($sql);
-        $stmt->bindValue(1, $update['message']['chat']['id'], \PDO::PARAM_INT);
-        $stmt->bindValue(2, $update['message']['chat']['first_name'], \PDO::PARAM_STR);
-        $stmt->bindValue(3, $update['message']['chat']['last_name'], \PDO::PARAM_STR);
+        $stmt->bindValue(1, $dto->chatId, \PDO::PARAM_INT);
+        $stmt->bindValue(2, $dto->firstName, \PDO::PARAM_STR);
+        $stmt->bindValue(3, $dto->lastName, \PDO::PARAM_STR);
 
         if (!$stmt->execute()) return false;
 

@@ -7,10 +7,10 @@ use Src\Interfaces\ActionsInterface;
 
 class NotFound extends MainController implements ActionsInterface
 {
-    public function handle(array $update): void
+    public function handle(object $dto): void
     {
         $this->connectionService->withArrayResponse(
-            'sendMessage?chat_id=' . $update['message']['chat']['id'] . '&text=I do not know what to say!'
+            'sendMessage?chat_id=' . $dto->chatId . '&text=I do not know what to say!'
         );
     }
 }
