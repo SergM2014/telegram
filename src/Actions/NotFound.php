@@ -2,13 +2,14 @@
 
 namespace Src\Actions;
 
+use Src\Controller\MainController;
 use Src\Interfaces\ActionsInterface;
 
-class NotFound implements ActionsInterface
+class NotFound extends MainController implements ActionsInterface
 {
-    public function handle(object $connectionService, array $update): void
+    public function handle(array $update): void
     {
-        $connectionService->withArrayResponse(
+        $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $update['message']['chat']['id'] . '&text=I do not know what to say!'
         );
     }
