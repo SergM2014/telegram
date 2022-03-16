@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Tests\\' => array($vendorDir . '/tahrz/simple-telegram-bot/tests'),
+    'Src\\' => array($baseDir . '/src'),
     'SimpleTelegramBot\\' => array($vendorDir . '/tahrz/simple-telegram-bot/src'),
 );

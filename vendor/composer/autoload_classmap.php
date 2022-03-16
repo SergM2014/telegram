@@ -7,4 +7,23 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'SimpleTelegramBot\\Chat\\MessageHelper' => $vendorDir . '/tahrz/simple-telegram-bot/src/Chat/MessageHelper.php',
+    'SimpleTelegramBot\\Connection\\ConnectionService' => $vendorDir . '/tahrz/simple-telegram-bot/src/Connection/ConnectionService.php',
+    'SimpleTelegramBot\\Connection\\CurlConnectionService' => $vendorDir . '/tahrz/simple-telegram-bot/src/Connection/CurlConnectionService.php',
+    'SimpleTelegramBot\\Update\\GetUpdate' => $vendorDir . '/tahrz/simple-telegram-bot/src/Update/GetUpdate.php',
+    'SimpleTelegramBot\\Update\\GetUpdateHelper' => $vendorDir . '/tahrz/simple-telegram-bot/src/Update/GetUpdateHelper.php',
+    'SimpleTelegramBot\\Update\\WebhookConfigurationHelper' => $vendorDir . '/tahrz/simple-telegram-bot/src/Update/WebhookConfigurationHelper.php',
+    'SimpleTelegramBot\\Update\\WebhookGetUpdateHelper' => $vendorDir . '/tahrz/simple-telegram-bot/src/Update/WebhookGetUpdateHelper.php',
+    'Src\\Actions\\ActionsInterface' => $baseDir . '/src/Actions/ActionsInterface.php',
+    'Src\\Actions\\Me' => $baseDir . '/src/Actions/Me.php',
+    'Src\\Actions\\NotFound' => $baseDir . '/src/Actions/NotFound.php',
+    'Src\\Actions\\Save' => $baseDir . '/src/Actions/Save.php',
+    'Src\\Actions\\Start' => $baseDir . '/src/Actions/Start.php',
+    'Src\\DataBase' => $baseDir . '/src/DataBase.php',
+    'Src\\Fabric' => $baseDir . '/src/Fabric.php',
+    'Tests\\LibraryTestCase' => $vendorDir . '/tahrz/simple-telegram-bot/tests/LibraryTestCase.php',
+    'Tests\\Unit\\Chat\\MessageHelperTest' => $vendorDir . '/tahrz/simple-telegram-bot/tests/Unit/Chat/MessageHelperTest.php',
+    'Tests\\Unit\\Connection\\CurlConnectionServiceTest' => $vendorDir . '/tahrz/simple-telegram-bot/tests/Unit/Connection/CurlConnectionServiceTest.php',
+    'Tests\\Unit\\Update\\GetUpdateHelperTest' => $vendorDir . '/tahrz/simple-telegram-bot/tests/Unit/Update/GetUpdateHelperTest.php',
+    'Tests\\Unit\\Update\\WebhookConfigurationHelperTest' => $vendorDir . '/tahrz/simple-telegram-bot/tests/Unit/Update/WebhookConfigurationHelperTest.php',
 );
