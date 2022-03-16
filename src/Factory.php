@@ -6,7 +6,7 @@ use Src\Actions\Me;
 use Src\Actions\Save;
 use Src\Actions\Start;
 use Src\Actions\NotFound;
-use Src\Actions\ActionsInterface;
+use Src\Interfaces\ActionsInterface;
 
 class Factory
 {

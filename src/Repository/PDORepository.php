@@ -2,12 +2,14 @@
 
 namespace Src\Repository;
 
+use Src\Interfaces\DBInterface;
 use const HOST;
 use const USER;
 use const NAME_BD;
 use const PASSWORD;
 
-class PDORepository {
+class PDORepository implements DBInterface
+{
 
     private static $connection;
 
@@ -26,7 +28,7 @@ class PDORepository {
         } catch(\PDOException $e) {die("Database Connection error:".$e->getMessage());}
     }
 
-    public static function getUserByChatId(int $id): \stdClass|bool
+    public function getUserByChatId(int $id): \stdClass|bool
     {
         try {
             $sql = "SELECT `chat_id`, `first_name`, `last_name` FROM `users` WHERE `chat_id`= ?";
@@ -39,7 +41,7 @@ class PDORepository {
         } catch(\PDOException $e) { die("Error:".$e->getMessage());}
     }
 
-    public static function setUser(array $update): bool
+    public function setUser(array $update): bool
     {
         if(self::getUserByChatId($update['message']['chat']['id'])) return true;
 

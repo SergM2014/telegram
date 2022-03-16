@@ -2,6 +2,8 @@
 
 namespace Src\Actions;
 
+use Src\Interfaces\ActionsInterface;
+
 class NotFound implements ActionsInterface
 {
     public function handle(object $connectionService, array $update): void

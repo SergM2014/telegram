@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Actions;
+namespace Src\Interfaces;
 
 interface ActionsInterface
 {
