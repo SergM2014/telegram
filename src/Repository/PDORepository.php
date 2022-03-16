@@ -1,8 +1,13 @@
 <?php
 
-namespace Src;
+namespace Src\Repository;
 
-class DataBase {
+use const HOST;
+use const USER;
+use const NAME_BD;
+use const PASSWORD;
+
+class PDORepository {
 
     private static $connection;
 
