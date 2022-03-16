@@ -8,7 +8,7 @@ use Src\Actions\Start;
 use Src\Actions\NotFound;
 use Src\Actions\ActionsInterface;
 
-class Fabric
+class Factory
 {
     public static function create(string $flag): ActionsInterface
     {

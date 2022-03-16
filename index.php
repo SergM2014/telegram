@@ -8,4 +8,4 @@ $connectionService = new SimpleTelegramBot\Connection\CurlConnectionService();
 $update = file_get_contents("php://input");
 $update = json_decode($update, true);
 
-Src\Fabric::create($update['message']['text'])->handle($connectionService, $update['message']['chat']['id']);
+Src\Factory::create($update['message']['text'])->handle($connectionService, $update['message']['chat']['id']);
