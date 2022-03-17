@@ -9,7 +9,7 @@ use Src\Interfaces\ActionsInterface;
 
 class Me extends MainController implements ActionsInterface
 {
-    public function handle(Dto $dto): void
+    public function handle(\stdClass $dto): void
     {
         $user = (new PDORepository())->getUserByChatId($dto->chatId);
         $this->connectionService->withArrayResponse(

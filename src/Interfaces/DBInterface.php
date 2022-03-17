@@ -6,7 +6,7 @@ use Src\Services\Dto;
 
 interface DBInterface
 {
-    public function getUserByChatId(int $id): \stdClass|bool;
+    public function getUserByChatId(int $id): \stdClass;
 
-    public function setUser(Dto $dto): bool;
+    public function setUser(\stdClass $dto): bool;
 }

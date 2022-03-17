@@ -8,7 +8,7 @@ use Src\Interfaces\ActionsInterface;
 
 class NotFound extends MainController implements ActionsInterface
 {
-    public function handle(Dto $dto): void
+    public function handle(\stdClass $dto): void
     {
         $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=I do not know what to say!'

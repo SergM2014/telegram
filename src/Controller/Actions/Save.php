@@ -9,7 +9,7 @@ use Src\Interfaces\ActionsInterface;
 
 class Save extends MainController implements ActionsInterface
 {
-    public function handle(Dto $dto): void
+    public function handle(\stdClass $dto): void
     {
         (new PDORepository())->setUser($dto);
         $this->connectionService->withArrayResponse(

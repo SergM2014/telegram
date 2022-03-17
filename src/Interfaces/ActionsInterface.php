@@ -6,5 +6,5 @@ use Src\Services\Dto;
 
 interface ActionsInterface
 {
-    public function handle(Dto $dto): void;
+    public function handle(\stdClass $dto): void;
 }

@@ -8,7 +8,7 @@ use Src\Interfaces\ActionsInterface;
 
 class Start extends MainController implements ActionsInterface
 {
-    public function handle(Dto $dto): void
+    public function handle(\stdClass $dto): void
     {
         $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=hi!'

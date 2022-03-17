@@ -25,7 +25,7 @@ class PDORepository implements DBInterface
         } catch(\PDOException $e) {die("Database Connection error:".$e->getMessage());}
     }
 
-    public function getUserByChatId(int $id): \stdClass|bool
+    public function getUserByChatId(int $id): \stdClass
     {
         try {
             $sql = "SELECT `chat_id`, `first_name`, `last_name` FROM `users` WHERE `chat_id`= ?";
@@ -38,7 +38,7 @@ class PDORepository implements DBInterface
         } catch(\PDOException $e) { die("Error:".$e->getMessage());}
     }
 
-    public function setUser(Dto $dto): bool
+    public function setUser(\stdClass $dto): bool
     {
         if(self::getUserByChatId($dto->chatId)) return true;
 
