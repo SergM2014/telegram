@@ -21,7 +21,7 @@ class Application
         $keys = array_keys($this->routes);
         $key = array_search($dto->text, $keys);
 
-        if(!$key) return NOT_FOUND_ROUTE;
+        if($key === false) return NOT_FOUND_ROUTE;
 
         $array = array_values($this->routes);
         return $array[$key];
