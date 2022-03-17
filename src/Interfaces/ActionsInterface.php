@@ -2,9 +2,9 @@
 
 namespace Src\Interfaces;
 
-use Src\Services\Dto;
+use \SimpleTelegramBot\Connection\CurlConnectionService;
 
 interface ActionsInterface
 {
-    public function handle(\stdClass $dto): void;
+    public function handle(CurlConnectionService $connectionService,\stdClass $dto): void;
 }
