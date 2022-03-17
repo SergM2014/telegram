@@ -6,7 +6,7 @@ use \SimpleTelegramBot\Connection\CurlConnectionService;
 
 class ConnectionService
 {
-    public static function getObject()
+    public static function getService()
     {
        return new CurlConnectionService();
     }
