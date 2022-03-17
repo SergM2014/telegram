@@ -2,7 +2,9 @@
 
 namespace Src\Interfaces;
 
+use Src\Services\Dto;
+
 interface ActionsInterface
 {
-    public function handle(object $dto): void;
+    public function handle(Dto $dto): void;
 }

@@ -2,11 +2,8 @@
 
 namespace Src\Repository;
 
+use Src\Services\Dto;
 use Src\Interfaces\DBInterface;
-use const HOST;
-use const USER;
-use const NAME_BD;
-use const PASSWORD;
 
 class PDORepository implements DBInterface
 {
@@ -41,7 +38,7 @@ class PDORepository implements DBInterface
         } catch(\PDOException $e) { die("Error:".$e->getMessage());}
     }
 
-    public function setUser(object $dto): bool
+    public function setUser(Dto $dto): bool
     {
         if(self::getUserByChatId($dto->chatId)) return true;
 

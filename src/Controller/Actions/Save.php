@@ -1,14 +1,15 @@
 <?php
 
-namespace Src\Actions;
+namespace Src\Controller\Actions;
 
+use Src\Services\Dto;
 use Src\Repository\PDORepository;
 use Src\Controller\MainController;
 use Src\Interfaces\ActionsInterface;
 
 class Save extends MainController implements ActionsInterface
 {
-    public function handle(object $dto): void
+    public function handle(Dto $dto): void
     {
         (new PDORepository())->setUser($dto);
         $this->connectionService->withArrayResponse(

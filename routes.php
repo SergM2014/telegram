@@ -1,7 +1,7 @@
 <?php
 
 $routes =[
-    '/start' =>  [\Src\Actions\Start::class, 'handle'],
-    '/save' => [\Src\Actions\Save::class, 'handle'],
-    '/me' => [\Src\Actions\Me::class, 'handle']
+    '/start' =>  [\Src\Controller\Actions\Start::class, 'handle'],
+    '/save' => [\Src\Controller\Actions\Save::class, 'handle'],
+    '/me' => [\Src\Controller\Actions\Me::class, 'handle']
 ];
