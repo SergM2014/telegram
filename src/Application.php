@@ -9,16 +9,15 @@ class Application
     public function __construct(private array $routes)
     {}
 
-    public function run(CurlConnectionService $connectionService, \stdClass $dto)
+    public function run(CurlConnectionService $connectionService, \stdClass $dto): void
     {
-        $items = $this->getControllerItems($dto);
-        $contr = $items[0];
-        $method = $items[1];
+        $item = $this->getControllerItems($dto);
+        $contr = $item;
         $myClass = new $contr();
-        $myClass->$method($connectionService, $dto);
+        $myClass($connectionService, $dto);
     }
 
-    private function getControllerItems(\stdClass $dto)
+    private function getControllerItems(\stdClass $dto): string
     {
         $keys = array_keys($this->routes);
         $key = array_search($dto->text, $keys);

@@ -8,7 +8,7 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Save implements ActionsInterface
 {
-    public function handle(CurlConnectionService $connectionService, \stdClass $dto): void
+    public function __invoke(CurlConnectionService $connectionService, \stdClass $dto): void
     {
         (new PDORepository())->setUser($dto);
         $connectionService->withArrayResponse(

@@ -8,7 +8,7 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Me implements ActionsInterface
 {
-    public function handle(CurlConnectionService $connectionService, \stdClass $dto): void
+    public function __invoke(CurlConnectionService $connectionService, \stdClass $dto): void
     {
         $user = (new PDORepository())->getUserByChatId($dto->chatId);
         $connectionService->withArrayResponse(

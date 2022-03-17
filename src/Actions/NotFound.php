@@ -7,7 +7,7 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class NotFound implements ActionsInterface
 {
-    public function handle(CurlConnectionService $connectionService, \stdClass $dto): void
+    public function __invoke(CurlConnectionService $connectionService, \stdClass $dto): void
     {
         $connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=I do not know what to say!'
