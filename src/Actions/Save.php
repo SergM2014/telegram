@@ -12,7 +12,7 @@ class Save extends MainController implements ActionsInterface
     {
         (new PDORepository())->setUser($dto);
         $this->connectionService->withArrayResponse(
-            'sendMessage?chat_id=' . $dto->id . '&text=Saved!'
+            'sendMessage?chat_id=' . $dto->chatId . '&text=Saved!'
         );
     }
 }

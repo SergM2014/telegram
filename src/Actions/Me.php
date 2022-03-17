@@ -12,7 +12,7 @@ class Me extends MainController implements ActionsInterface
     {
         $user = (new PDORepository())->getUserByChatId($dto->chatId);
         $this->connectionService->withArrayResponse(
-            'sendMessage?chat_id=' . $dto->id . '&text=Here You are!  First Name-> '
+            'sendMessage?chat_id=' . $dto->chatId . '&text=Here You are!  First Name-> '
             .$user->first_name.'   Last Name->'.$user->last_name
         );
     }

@@ -5,4 +5,5 @@ require_once 'settings.php';
 
 $dto = \Src\Services\Dto::getObject("php://input");
 
-Src\Factory::create($dto->text)->handle($dto);
+(new \Src\Application($routes))->run($dto);
+
