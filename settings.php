@@ -5,6 +5,11 @@ require_once 'vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
+
+
 define("BOT_TOKEN", $_ENV['BOT_TOKEN']);
 define("BASIC_API_URL", 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 define("WEBHOOK_URL", $_ENV['WEBHOOK_URL']);
@@ -18,8 +23,6 @@ define("NOT_FOUND_ROUTE", \Src\Actions\NotFound::class);
 
 require_once 'routes.php';
 
-function logging($item)
-{
-    $log = date('Y-m-d H:i:s') . ' ' . print_r($item, true);
-    file_put_contents(DATA_LOGS, $log . PHP_EOL, FILE_APPEND);
-}
+$logger = new Logger('my_logger');
+$logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
+$logger->info('Message that will be logged');
