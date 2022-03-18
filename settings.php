@@ -1,15 +1,20 @@
 <?php
 
-const BOT_TOKEN = '5289780922:AAGvLtDTZZhLDnGnB1ZOzVDWjtoOhXFFWE8';
-const BASIC_API_URL = 'https://api.telegram.org/bot'.BOT_TOKEN.'/';
-const WEBHOOK_URL = 'https://6gg5t.ml';
-const DATA_LOGS = __DIR__ . '/logs.txt';
+require_once 'vendor/autoload.php';
 
-const HOST = 'nv452691.mysql.tools';
-const USER = 'nv452691_db';
-const PASSWORD = 'G2W3X5pa';
-const NAME_BD = 'nv452691_db';
-const NOT_FOUND_ROUTE = \Src\Actions\NotFound::class;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+define("BOT_TOKEN", $_ENV['BOT_TOKEN']);
+define("BASIC_API_URL", 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
+define("WEBHOOK_URL", $_ENV['WEBHOOK_URL']);
+define("DATA_LOGS",  __DIR__ . '/logs.txt');
+
+define("HOST", $_ENV['HOST']);
+define("USER", $_ENV['USER']);
+define("PASSWORD", $_ENV['PASSWORD']);
+define("NAME_BD", $_ENV['NAME_BD']);
+define("NOT_FOUND_ROUTE", \Src\Actions\NotFound::class);
 
 require_once 'routes.php';
 
