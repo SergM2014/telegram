@@ -2,7 +2,6 @@
 
 namespace Src\Repository;
 
-use Src\Services\Dto;
 use Src\Interfaces\DBInterface;
 
 class PDORepository implements DBInterface
