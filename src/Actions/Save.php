@@ -2,13 +2,14 @@
 
 namespace Src\Actions;
 
+use Src\Dto;
 use Src\Repository\PDORepository;
 use Src\Interfaces\ActionsInterface;
 use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Save implements ActionsInterface
 {
-    public function __invoke(CurlConnectionService $connectionService, \stdClass $dto): void
+    public function __invoke(CurlConnectionService $connectionService, Dto $dto): void
     {
         (new PDORepository())->setUser($dto);
         $connectionService->withArrayResponse(

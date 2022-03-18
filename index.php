@@ -2,7 +2,7 @@
 
 require_once 'settings.php';
 
-$dto = Src\Dto::getObject("php://input");
+$dto = (new \Src\Dto("php://input"))->getObject();
 $connectionService = \Src\Services\ConnectionService::getService();
 
 (new \Src\Dispatcher($routes))->run($connectionService, $dto);

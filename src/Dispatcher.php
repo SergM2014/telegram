@@ -9,7 +9,7 @@ class Dispatcher
     public function __construct(private array $routes)
     {}
 
-    public function run(CurlConnectionService $connectionService, \stdClass $dto): void
+    public function run(CurlConnectionService $connectionService, Dto $dto): void
     {
         $item = $this->getRoutingItems($dto);
         $contr = $item;
@@ -17,7 +17,7 @@ class Dispatcher
         $myClass($connectionService, $dto);
     }
 
-    private function getRoutingItems(\stdClass $dto): string
+    private function getRoutingItems(Dto $dto): string
     {
         $keys = array_keys($this->routes);
         $key = array_search($dto->text, $keys);

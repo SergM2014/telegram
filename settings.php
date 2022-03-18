@@ -25,4 +25,4 @@ require_once 'routes.php';
 
 $logger = new Logger('my_logger');
 $logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
-$logger->info('Message that will be logged');
+//$logger->info('Message that will be logged');
