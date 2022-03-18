@@ -4,20 +4,20 @@ namespace Src;
 
 use \SimpleTelegramBot\Connection\CurlConnectionService;
 
-class Application
+class Dispatcher
 {
     public function __construct(private array $routes)
     {}
 
     public function run(CurlConnectionService $connectionService, \stdClass $dto): void
     {
-        $item = $this->getControllerItems($dto);
+        $item = $this->getRoutingItems($dto);
         $contr = $item;
         $myClass = new $contr();
         $myClass($connectionService, $dto);
     }
 
-    private function getControllerItems(\stdClass $dto): string
+    private function getRoutingItems(\stdClass $dto): string
     {
         $keys = array_keys($this->routes);
         $key = array_search($dto->text, $keys);
