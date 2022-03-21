@@ -10,7 +10,7 @@ use Src\Interfaces\DBInterface;
 class PDORepository implements DBInterface
 {
 
-    private static $connection;
+    private static \PDO $connection;
 
     public static function conn(): \PDO
     {
