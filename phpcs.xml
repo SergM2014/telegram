@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="gsouf">
+
+<!--    <file>./src/</file>-->
+
+    <!--The complete PSR-2 ruleset-->
+    <rule ref="PSR2"/>
+
+    <!-- By default we use single quote only. Double quotes come when a variable is inside -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage">
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+<!--        <type>warning</type>-->
+    </rule>
+
+</ruleset>

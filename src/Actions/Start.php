@@ -8,7 +8,7 @@ use Src\Dto;
 use Src\Interfaces\ActionsInterface;
 use SimpleTelegramBot\Connection\CurlConnectionService;
 
-class Start  implements ActionsInterface
+class Start implements ActionsInterface
 {
     public function __invoke(CurlConnectionService $connectionService, Dto $dto): void
     {

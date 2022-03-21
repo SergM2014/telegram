@@ -26,5 +26,4 @@ class Dto
     {
         return $this;
     }
-
 }
