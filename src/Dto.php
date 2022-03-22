@@ -22,8 +22,4 @@ class Dto
         $this->lastName = $update['message']['chat']['last_name'];
     }
 
-    public function getObject(): self
-    {
-        return $this;
-    }
 }
