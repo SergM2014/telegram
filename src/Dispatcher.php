@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Src;
 
+use Di\Container;
 use \SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Dispatcher
@@ -14,9 +15,8 @@ class Dispatcher
 
     public function run(CurlConnectionService $connectionService, Dto $dto): void
     {
-        $item = $this->getRoutingItems($dto);
-        $contr = $item;
-        $myClass = new $contr();
+        $contr = $this->getRoutingItems($dto);
+        $myClass = (new Container())->get($contr);
         $myClass($connectionService, $dto);
     }
 
@@ -25,11 +25,10 @@ class Dispatcher
         $keys = array_keys($this->routes);
         $key = array_search($dto->text, $keys);
 
-        if ($key === false) {
-            return NOT_FOUND_ROUTE;
-        }
+        if ($key === false) return NOT_FOUND_ROUTE;
 
         $array = array_values($this->routes);
+
         return $array[$key];
     }
 }
