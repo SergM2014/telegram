@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src;
 
-use Di\Container;
+use DI\Container;
 use \SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Dispatcher
