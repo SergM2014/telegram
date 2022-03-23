@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 require_once 'vendor/autoload.php';
+require_once 'routes.php';
 
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use \Src\Actions\NotFound;
+use Src\Actions\NotFound;
+use Monolog\Handler\StreamHandler;
+
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -21,7 +23,7 @@ define('PASSWORD', $_ENV['PASSWORD']);
 define('NAME_BD', $_ENV['NAME_BD']);
 define('NOT_FOUND_ROUTE', NotFound::class);
 
-require_once 'routes.php';
+require_once 'bootstrap.php';
 
 $logger = new Logger('my_logger');
 $logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
