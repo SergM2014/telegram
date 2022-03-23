@@ -4,7 +4,7 @@ namespace Src\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class User2 extends Eloquent
+class User extends Eloquent
 
 {
 
