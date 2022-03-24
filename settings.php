@@ -25,6 +25,19 @@ define('NOT_FOUND_ROUTE', NotFound::class);
 
 require_once 'bootstrap.php';
 
-$logger = new Logger('my_logger');
-$logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
+//$logger = new Logger('my_logger');
+//$logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
 //$logger->info('Message that will be logged');
+//return [
+//    // ...
+//
+//    Psr\Log\LoggerInterface::class => DI\factory(function () {
+//        $logger = new Logger('mylog');
+//
+//        $fileHandler = new StreamHandler('DATA_LOGS', Logger::DEBUG);
+//        $fileHandler->setFormatter(new LineFormatter());
+//        $logger->pushHandler($fileHandler);
+//
+//        return $logger;
+//    }),
+//];

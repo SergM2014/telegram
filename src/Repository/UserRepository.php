@@ -8,6 +8,7 @@ use Src\Dto;
 use Monolog\Logger;
 use Src\Models\User;
 use Src\MyException;
+use Psr\Log\LoggerInterface;
 use Monolog\Handler\StreamHandler;
 use Src\Interfaces\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -15,6 +16,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
+//    public function __construct(
+//       public Logger $logger
+//    )
+//    {}
+
     public function getUserByChatId(int $id): User
     {
 //        try {
@@ -27,6 +33,7 @@ class UserRepository implements UserRepositoryInterface
 //            $logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
 //            $logger->info($ex->getMessage());
 //        }
+ //       $this->logger->info('bum-bum-bum');
         return User::where('chat_id', $id)->firstOrFail();
     }
 
