@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Src;
 
 use DI\Container;
-use \SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Dispatcher
 {
@@ -13,11 +12,11 @@ class Dispatcher
     {
     }
 
-    public function run(CurlConnectionService $connectionService, Dto $dto): void
+    public function run(Dto $dto): void
     {
         $contr = $this->getRoutingItems($dto);
         $myClass = (new Container())->get($contr);
-        $myClass($connectionService, $dto);
+        $myClass($dto);
     }
 
     private function getRoutingItems(Dto $dto): string

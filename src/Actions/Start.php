@@ -10,9 +10,14 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Start implements ActionsInterface
 {
-    public function __invoke(CurlConnectionService $connectionService, Dto $dto): void
+    public function __construct(
+        private CurlConnectionService $connectionService,
+    )
+    {}
+
+    public function __invoke(Dto $dto): void
     {
-        $connectionService->withArrayResponse(
+        $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=hi!'
         );
     }

@@ -9,5 +9,5 @@ use \SimpleTelegramBot\Connection\CurlConnectionService;
 
 interface ActionsInterface
 {
-    public function __invoke(CurlConnectionService $connectionService, Dto $dto): void;
+    public function __invoke(Dto $dto): void;
 }

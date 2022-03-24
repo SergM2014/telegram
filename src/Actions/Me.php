@@ -11,10 +11,16 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Me implements ActionsInterface
 {
-    public function __invoke(CurlConnectionService $connectionService, Dto $dto): void
+    public function __construct(
+        private CurlConnectionService $connectionService,
+        private UserRepository $userRepository
+    )
+    {}
+
+    public function __invoke(Dto $dto): void
     {
-        $user = (new UserRepository())->getUserByChatId($dto->chatId);
-        $connectionService->withArrayResponse(
+        $user = $this->userRepository->getUserByChatId($dto->chatId);
+        $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=Here You are!  First Name-> '
             .$user->first_name.'   Last Name->'.$user->last_name
         );

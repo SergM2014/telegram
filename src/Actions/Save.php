@@ -11,10 +11,16 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class Save implements ActionsInterface
 {
-    public function __invoke(CurlConnectionService $connectionService, Dto $dto): void
+    public function __construct(
+        private CurlConnectionService $connectionService,
+        private UserRepository $userRepository
+    )
+    {}
+
+    public function __invoke(Dto $dto): void
     {
-        (new UserRepository())->createUser($dto);
-        $connectionService->withArrayResponse(
+        $this->userRepository->createUser($dto);
+        $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=Saved!'
         );
     }

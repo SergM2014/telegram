@@ -13,6 +13,5 @@ $dto = new \Src\Dto(
     $update['message']['chat']['first_name'],
     $update['message']['chat']['last_name']
 );
-$connectionService = new SimpleTelegramBot\Connection\CurlConnectionService();
 
-(new \Src\Dispatcher($routes))->run($connectionService, $dto);
+(new \Src\Dispatcher($routes))->run($dto);
