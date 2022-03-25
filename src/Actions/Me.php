@@ -19,7 +19,7 @@ class Me implements ActionsInterface
 
     public function __invoke(Dto $dto): void
     {
-        $user = $this->userRepository->getUserByChatId($dto->chatId);
+        $user = $this->userRepository->getUserByChatId($dto);
         $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=Here You are!  First Name-> '
             .$user->first_name.'   Last Name->'.$user->last_name

@@ -5,53 +5,47 @@ declare(strict_types=1);
 namespace Src\Repository;
 
 use Src\Dto;
-use Src\Logging;
-use Monolog\Logger;
 use Src\Models\User;
-use Src\MyException;
-use Psr\Log\LoggerInterface;
-use Monolog\Handler\StreamHandler;
+use Src\ErrorHandling;
 use Src\Interfaces\UserRepositoryInterface;
+use SimpleTelegramBot\Connection\CurlConnectionService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 
 class UserRepository implements UserRepositoryInterface
 {
-    use Logging;
-//    public function __construct(
-//       public Logger $logger
-//    )
-//    {}
+    use ErrorHandling;
 
-    public function getUserByChatId(int $id): User
+    public function __construct(
+        private CurlConnectionService $connectionService,
+    )
+    {}
+
+    public function getUserByChatId(Dto $dto): User
     {
-//        try {
-//            $user = User::where('chat_id', $id)->firstOrFail();
-//        }
-//           // throw new MyException('myException', 'my error message');
-//        catch(ModelNotFoundException $ex){
-//           // print_r($ex->getMessage());
-//            $logger = new Logger('my_logger');
-//            $logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
-//            $logger->info($ex->getMessage());
-//        }
+        try {
+            $user = User::where('chat_id', $dto->chatId)->firstOrFail();
+        }
+        catch(ModelNotFoundException $ex){
+            $this->processError($ex->getMessage(), $dto);
+        }
 
-        return User::where('chat_id', $id)->firstOrFail();
+        return $user;
     }
 
     public function createUser(Dto $dto): User
     {
+        $user = $this->getUserByChatId($dto);
 
-       // $this->logger->info('bum-bum-bum');
-        $this->makeLog('hallo2');
-        $user =  User::where('chat_id', $dto->chatId)->first();
         if ($user) return $user;
-
-       $user = User::create([
-            'chat_id' => $dto->chatId,
-            'first_name' => $dto->firstName,
-            'last_name' => $dto->lastName
-        ]);
+        try {
+            $user = User::create([
+                'chat_id' => $dto->chatId,
+                'first_name' => $dto->firstName,
+                'last_name' => $dto->lastName
+            ]);
+        } catch (\PDOException $ex) {
+            $this->processError($ex->getMessage(), $dto);
+        }
 
        return $user;
     }

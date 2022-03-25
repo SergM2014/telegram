@@ -17,6 +17,7 @@ class Dispatcher
         $contr = $this->getRoutingItems($dto);
         $myClass = (new Container())->get($contr);
         $myClass($dto);
+
     }
 
     private function getRoutingItems(Dto $dto): string

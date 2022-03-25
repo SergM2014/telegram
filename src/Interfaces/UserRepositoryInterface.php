@@ -9,7 +9,7 @@ use Src\Models\User;
 
 interface UserRepositoryInterface
 {
-    public function getUserByChatId(int $id): User;
+    public function getUserByChatId(Dto $dto): ?User;
 
-    public function createUser(Dto $dto): User;
+    public function createUser(Dto $dto): ?User;
 }
