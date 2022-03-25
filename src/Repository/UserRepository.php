@@ -16,10 +16,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-//    public function __construct(
-//       public Logger $logger
-//    )
-//    {}
+    public function __construct(
+       public Logger $logger
+    )
+    {}
 
     public function getUserByChatId(int $id): User
     {
@@ -33,12 +33,14 @@ class UserRepository implements UserRepositoryInterface
 //            $logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
 //            $logger->info($ex->getMessage());
 //        }
- //       $this->logger->info('bum-bum-bum');
+
         return User::where('chat_id', $id)->firstOrFail();
     }
 
     public function createUser(Dto $dto): User
     {
+
+        $this->logger->info('bum-bum-bum');
         $user =  User::where('chat_id', $dto->chatId)->first();
         if ($user) return $user;
 

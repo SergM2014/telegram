@@ -26,6 +26,7 @@ class Save implements ActionsInterface
     {
         $builder = new ContainerBuilder();
         $builder->addDefinitions([
+
             \Psr\Log\LoggerInterface::class => \DI\factory(function () {
                 $logger = new Logger('mylog');
 
@@ -35,9 +36,10 @@ class Save implements ActionsInterface
 
                 return $logger;
             })
-        ]);
 
+        ]);
         $container = $builder->build();
+
         $class = $container->get($this->userRepository::class);
 
 //       $class = (new Container())->get($this->userRepository::class);
