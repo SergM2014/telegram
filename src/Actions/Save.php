@@ -24,27 +24,8 @@ class Save implements ActionsInterface
 
     public function __invoke(Dto $dto): void
     {
-        $builder = new ContainerBuilder();
-        $builder->addDefinitions([
-
-            \Psr\Log\LoggerInterface::class => \DI\factory(function () {
-                $logger = new Logger('mylog');
-
-                $fileHandler = new StreamHandler('DATA_LOGS', Logger::DEBUG);
-                $fileHandler->setFormatter(new LineFormatter());
-                $logger->pushHandler($fileHandler);
-
-                return $logger;
-            })
-
-        ]);
-        $container = $builder->build();
-
-        $class = $container->get($this->userRepository::class);
-
-//       $class = (new Container())->get($this->userRepository::class);
+        $class = (new Container())->get($this->userRepository::class);
         $class->createUser($dto);
-//        $this->userRepository->createUser($dto);
         $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=Saved!'
         );

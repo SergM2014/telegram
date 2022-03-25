@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Src\Repository;
 
 use Src\Dto;
+use Src\Logging;
 use Monolog\Logger;
 use Src\Models\User;
 use Src\MyException;
@@ -16,10 +17,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(
-       public Logger $logger
-    )
-    {}
+    use Logging;
+//    public function __construct(
+//       public Logger $logger
+//    )
+//    {}
 
     public function getUserByChatId(int $id): User
     {
@@ -40,7 +42,8 @@ class UserRepository implements UserRepositoryInterface
     public function createUser(Dto $dto): User
     {
 
-        $this->logger->info('bum-bum-bum');
+       // $this->logger->info('bum-bum-bum');
+        $this->makeLog('hallo2');
         $user =  User::where('chat_id', $dto->chatId)->first();
         if ($user) return $user;
 
