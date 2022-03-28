@@ -15,7 +15,7 @@ trait ErrorHandling {
     {
         $this->logger = new Logger('my_logger');
         $this->logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
-        $this->logger->info($messageToLog);
+        $this->logger->debug($messageToLog);
     }
 
     public function processError(string $messageToLog, Dto $dto): void
