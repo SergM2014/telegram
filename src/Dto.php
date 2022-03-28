@@ -13,5 +13,4 @@ class Dto
          public readonly string $lastName
     )
     {}
-
 }

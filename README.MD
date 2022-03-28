@@ -1,5 +1,9 @@
 It`s simple telegram bot
-if /start -answer hi,
-/save  -save data about user
-/me printout the datas about user
-any other input writes i do not know what to say
+
+if print /start -answers 'Hi',
+
+if /save  - saves data about user and answers 'Saved'
+
+if /me - prints out the data about user
+
+in case of any other input - writes 'I do not know what to say'
