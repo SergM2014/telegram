@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="gsouf">
 
-    <rule ref="PSR2"/>
     <rule ref="Squiz.Strings.DoubleQuoteUsage">
         <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
     </rule>
