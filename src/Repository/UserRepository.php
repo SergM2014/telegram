@@ -34,9 +34,9 @@ class UserRepository implements UserRepositoryInterface
 
     public function createUser(Dto $dto): User
     {
-        $user = $this->getUserByChatId($dto);
-
+        $user = User::where('chat_id', $dto->chatId)->first();
         if ($user) return $user;
+
         try {
             $user = User::create([
                 'chat_id' => $dto->chatId,
