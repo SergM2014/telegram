@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace Src\Repository;
 
 use Src\Dto;
+use DI\Container;
+use Monolog\Logger;
 use Src\Models\User;
-use Src\ErrorHandling;
+use Src\Actions\ErrorOutput;
+use Monolog\Handler\StreamHandler;
 use Src\Interfaces\UserRepositoryInterface;
-use SimpleTelegramBot\Connection\CurlConnectionService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-    use ErrorHandling;
-
-    public function __construct(
-        private CurlConnectionService $connectionService,
-    )
-    {}
+    private Logger $logger;
 
     public function getUserByChatId(Dto $dto): User
     {
@@ -26,7 +23,7 @@ class UserRepository implements UserRepositoryInterface
             $user = User::where('chat_id', $dto->chatId)->firstOrFail();
         }
         catch(ModelNotFoundException $ex){
-            $this->processError($ex->getMessage(), $dto);
+            $this->handleError($ex->getMessage(), $dto);
         }
 
         return $user;
@@ -44,9 +41,24 @@ class UserRepository implements UserRepositoryInterface
                 'last_name' => $dto->lastName
             ]);
         } catch (\PDOException $ex) {
-            $this->processError($ex->getMessage(), $dto);
+            $this->handleError($ex->getMessage(), $dto);
         }
 
        return $user;
+    }
+
+    private function printLog(string $messageToLog): void
+    {
+        $this->logger = new Logger('my_logger');
+        $this->logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
+        $this->logger->debug($messageToLog);
+    }
+
+    public function handleError(string $messageToLog, Dto $dto): void
+    {
+        $this->printLog($messageToLog);
+        $myClass = (new Container())->get(ErrorOutput::class);
+        $myClass($dto);
+        exit();
     }
 }
