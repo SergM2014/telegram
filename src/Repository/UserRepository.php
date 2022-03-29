@@ -14,10 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(
-      public  Logger $logger
-    )
-    { }
+    public function __construct(private Logger $logger) { }
 
     public function getUserByChatId(Dto $dto): User
     {
@@ -51,10 +48,12 @@ class UserRepository implements UserRepositoryInterface
 
     private function handleError(string $messageToLog, Dto $dto): void
     {
-        $this->logger->info($messageToLog);
-
-        $myClass = (new Container())->get(ErrorOutput::class);
-        $myClass($dto);
-        exit();
+        try {
+            $myClass = (new Container())->get(ErrorOutput::class);
+            $myClass($dto);
+            throw new \Exception();
+        } catch (\Exception $ex) {
+            $this->logger->info($messageToLog);
+        }
     }
 }

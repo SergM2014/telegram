@@ -4,21 +4,17 @@ declare(strict_types=1);
 
 namespace Src;
 
-use DI\ContainerBuilder;
-
 class Dispatcher
 {
+    use ContainerTrait;
+
     public function __construct(private array $routes)
-    {
-    }
+    {}
 
     public function run(Dto $dto): void
     {
         $contr = $this->getRoutingItems($dto);
-        $builder = new ContainerBuilder();
-        $builder->addDefinitions(CONFIG_FILE);
-        $container = $builder->build();
-        $myClass = $container->get($contr);
+        $myClass = $this->buildContainer()->get($contr);
 
         $myClass($dto);
     }
