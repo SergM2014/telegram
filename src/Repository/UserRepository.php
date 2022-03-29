@@ -9,13 +9,15 @@ use DI\Container;
 use Monolog\Logger;
 use Src\Models\User;
 use Src\Actions\ErrorOutput;
-use Monolog\Handler\StreamHandler;
 use Src\Interfaces\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-    private Logger $logger;
+    public function __construct(
+      public  Logger $logger
+    )
+    { }
 
     public function getUserByChatId(Dto $dto): User
     {
@@ -47,16 +49,10 @@ class UserRepository implements UserRepositoryInterface
        return $user;
     }
 
-    private function printLog(string $messageToLog): void
+    private function handleError(string $messageToLog, Dto $dto): void
     {
-        $this->logger = new Logger('my_logger');
-        $this->logger->pushHandler(new StreamHandler(DATA_LOGS, Logger::DEBUG));
-        $this->logger->debug($messageToLog);
-    }
+        $this->logger->info($messageToLog);
 
-    public function handleError(string $messageToLog, Dto $dto): void
-    {
-        $this->printLog($messageToLog);
         $myClass = (new Container())->get(ErrorOutput::class);
         $myClass($dto);
         exit();

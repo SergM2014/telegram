@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Src;
 
-use DI\Container;
-use Src\Actions\Save;
 use DI\ContainerBuilder;
 
 class Dispatcher
@@ -17,7 +15,11 @@ class Dispatcher
     public function run(Dto $dto): void
     {
         $contr = $this->getRoutingItems($dto);
-        $myClass = (new Container())->get($contr);
+        $builder = new ContainerBuilder();
+        $builder->addDefinitions(CONFIG_FILE);
+        $container = $builder->build();
+        $myClass = $container->get($contr);
+
         $myClass($dto);
     }
 
