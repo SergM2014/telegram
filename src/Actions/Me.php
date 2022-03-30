@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Src\Actions;
 
 use Src\Dto;
-use Src\Services\DIContainer;
+use DI\Container;
 use Src\Repository\UserRepository;
-use Src\Interfaces\ActionsInterface;
+use Src\Interfaces\ActionsContainerInterface;
 use SimpleTelegramBot\Connection\CurlConnectionService;
 
-class Me implements ActionsInterface
+class Me implements ActionsContainerInterface
 {
     public function __construct(
         private CurlConnectionService $connectionService,
@@ -18,9 +18,8 @@ class Me implements ActionsInterface
     )
     {}
 
-    public function __invoke(Dto $dto): void
+    public function __invoke(Dto $dto, Container $container): void
     {
-        $container = (new DIContainer())->build();
         $user = $container->get($this->userRepository::class)->getUserByChatId($dto);
         $this->connectionService->withArrayResponse(
             'sendMessage?chat_id=' . $dto->chatId . '&text=Here You are!  First Name-> '

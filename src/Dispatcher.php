@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src;
 
-use Src\Services\DIContainer;
+use DI\ContainerBuilder;
 
 class Dispatcher
 {
@@ -14,9 +14,12 @@ class Dispatcher
     public function run(Dto $dto): void
     {
         $contr = $this->getRoutingItems($dto);
-        $container = (new DIContainer())->build();
+
+        $builder = new ContainerBuilder();
+        $builder->addDefinitions($_SERVER['DOCUMENT_ROOT'].'/DIConfig.php');
+        $container = $builder->build();
         $myClass = $container->get($contr);
-        $myClass($dto);
+        $myClass($dto, $container);
     }
 
     private function getRoutingItems(Dto $dto): string

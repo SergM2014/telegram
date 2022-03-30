@@ -13,4 +13,6 @@ return [
 
         return $logger;
     }),
+
+    \Src\Interfaces\UserRepositoryInterface::class =>DI\create(\Src\Repository\UserRepository::class)
 ];
