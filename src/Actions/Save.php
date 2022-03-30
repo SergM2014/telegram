@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace Src\Actions;
 
 use Src\Dto;
-use Src\ContainerTrait;
 use Src\Repository\UserRepository;
 use Src\Interfaces\ActionsInterface;
 use SimpleTelegramBot\Connection\CurlConnectionService;
+use Src\Services\DIContainer;
 
 class Save implements ActionsInterface
 {
-    use ContainerTrait;
-
     public function __construct(
         private CurlConnectionService $connectionService,
         private UserRepository $userRepository
@@ -22,7 +20,8 @@ class Save implements ActionsInterface
 
     public function __invoke(Dto $dto): void
     {
-        $class = $this->buildContainer()->get($this->userRepository::class);
+        $container = (new DIContainer())->build();
+        $class = $container->get($this->userRepository::class);
         $class->createUser($dto);
 
         $this->connectionService->withArrayResponse(

@@ -15,3 +15,5 @@ $dto = new \Src\Dto(
 );
 
 (new \Src\Dispatcher($routes))->run($dto);
+
+//var_dump($GLOBALS['services']);

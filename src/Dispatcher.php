@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Src;
 
+use Src\Services\DIContainer;
+
 class Dispatcher
 {
-    use ContainerTrait;
-
     public function __construct(private array $routes)
     {}
 
     public function run(Dto $dto): void
     {
         $contr = $this->getRoutingItems($dto);
-        $myClass = $this->buildContainer()->get($contr);
+        $container = (new DIContainer())->build();
+        $myClass = $container->get($contr);
 
         $myClass($dto);
     }
