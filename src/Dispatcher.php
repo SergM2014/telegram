@@ -16,7 +16,6 @@ class Dispatcher
         $contr = $this->getRoutingItems($dto);
         $container = (new DIContainer())->build();
         $myClass = $container->get($contr);
-
         $myClass($dto);
     }
 

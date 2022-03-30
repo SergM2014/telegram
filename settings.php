@@ -16,4 +16,3 @@ define('DI_CONFIG_FILE', $_SERVER['DOCUMENT_ROOT'].'/DIConfig.php');
 define('NOT_FOUND_ROUTE', NotFound::class);
 
 require_once 'bootstrap.php';
-require_once 'services.php';
