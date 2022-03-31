@@ -2,13 +2,13 @@
 
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
-use Src\Repository\UserRepository;
+use Src\Actions\ErrorOutput;
 use Monolog\Handler\StreamHandler;
+use Src\Repository\UserRepository;
 use Monolog\Formatter\LineFormatter;
 use Src\Interfaces\UserRepositoryInterface;
 use SimpleTelegramBot\Connection\ConnectionService;
 use SimpleTelegramBot\Connection\CurlConnectionService;
-use Src\Actions\ErrorOutput;
 
 return [
     LoggerInterface::class => DI\factory(function () {
