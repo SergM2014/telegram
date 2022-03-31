@@ -8,6 +8,7 @@ use Monolog\Formatter\LineFormatter;
 use Src\Interfaces\UserRepositoryInterface;
 use SimpleTelegramBot\Connection\ConnectionService;
 use SimpleTelegramBot\Connection\CurlConnectionService;
+use Src\Actions\ErrorOutput;
 
 return [
     LoggerInterface::class => DI\factory(function () {
@@ -20,4 +21,9 @@ return [
     }),
     UserRepositoryInterface::class => DI\get(UserRepository::class),
     ConnectionService::class => DI\get(CurlConnectionService::class),
+    ErrorOutput::class => DI\factory(function(
+        ConnectionService $connectionService
+    ){
+        return new ErrorOutput($connectionService);
+    })
 ];

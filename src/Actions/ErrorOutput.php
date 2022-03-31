@@ -6,12 +6,12 @@ namespace Src\Actions;
 
 use Src\Dto;
 use Src\Interfaces\ActionsInterface;
-use SimpleTelegramBot\Connection\CurlConnectionService;
+use SimpleTelegramBot\Connection\ConnectionService;
 
 class ErrorOutput implements ActionsInterface
 {
     public function __construct(
-        private CurlConnectionService $connectionService,
+        private ConnectionService $connectionService,
     )
     {}
 
