@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Src\Actions;
 
 use Src\Dto;
-use Src\Interfaces\SimpleActionsInterface;
+use Src\Interfaces\ActionsInterface;
 use SimpleTelegramBot\Connection\CurlConnectionService;
 
-class Start implements SimpleActionsInterface
+class Start implements ActionsInterface
 {
     public function __construct(
         private CurlConnectionService $connectionService,

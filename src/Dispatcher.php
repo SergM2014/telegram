@@ -19,7 +19,7 @@ class Dispatcher
         $builder->addDefinitions($_SERVER['DOCUMENT_ROOT'].'/DiSettings.php');
         $container = $builder->build();
         $myClass = $container->get($contr);
-        $myClass($dto, $container);
+        $myClass($dto);
     }
 
     private function getRoutingItems(Dto $dto): string

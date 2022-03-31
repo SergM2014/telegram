@@ -6,7 +6,7 @@ namespace Src\Interfaces;
 
 use Src\Dto;
 
-interface SimpleActionsInterface
+interface ActionsInterface
 {
     public function __invoke(Dto $dto): void;
 }
