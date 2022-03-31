@@ -16,7 +16,7 @@ class Dispatcher
         $contr = $this->getRoutingItems($dto);
 
         $builder = new ContainerBuilder();
-        $builder->addDefinitions($_SERVER['DOCUMENT_ROOT'].'/DIConfig.php');
+        $builder->addDefinitions($_SERVER['DOCUMENT_ROOT'].'/DiSettings.php');
         $container = $builder->build();
         $myClass = $container->get($contr);
         $myClass($dto, $container);

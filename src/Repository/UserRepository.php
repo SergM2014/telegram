@@ -6,15 +6,15 @@ namespace Src\Repository;
 
 use Src\Dto;
 use DI\Container;
-use Monolog\Logger;
 use Src\Models\User;
 use Src\Actions\ErrorOutput;
+use Psr\Log\LoggerInterface;
 use Src\Interfaces\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(private Logger $logger) { }
+    public function __construct(private LoggerInterface $logger) { }
 
     public function getUserByChatId(Dto $dto): User
     {

@@ -6,15 +6,14 @@ namespace Src\Actions;
 
 use Src\Dto;
 use DI\Container;
-use Src\Repository\UserRepository;
 use Src\Interfaces\UserRepositoryInterface;
 use Src\Interfaces\ActionsContainerInterface;
-use SimpleTelegramBot\Connection\CurlConnectionService;
+use SimpleTelegramBot\Connection\ConnectionService;
 
 class Save implements ActionsContainerInterface
 {
     public function __construct(
-        private CurlConnectionService $connectionService,
+        private ConnectionService $connectionService,
         private UserRepositoryInterface $userRepository
     )
     {}
