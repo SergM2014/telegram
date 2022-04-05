@@ -52,12 +52,18 @@ class ActionsTest extends TestCase
       if(defined('BASIC_API_URL')) define('BASIC_API_URL', 'https://api.telegram.org/bot1edhrto;drthg;l/');
     }
 
+    /**
+     * @covers \Src\Actions\Start::_invoke
+     */
     public function testStart(): void
     {
        $start = new Start($this->connectionService);
        $start($this->dto);
     }
 
+    /**
+     * @covers \Src\Actions\Save::__invoke
+     */
     public function testSave(): void
     {
         $this->userRepository ->expects($this->once())
@@ -68,6 +74,9 @@ class ActionsTest extends TestCase
         $save($this->dto);
     }
 
+    /**
+     * @covers \Src\Actions\Me::__invoke
+     */
     public function testMe(): void
     {
         $this->userRepository ->expects($this->once())
@@ -78,12 +87,18 @@ class ActionsTest extends TestCase
         $me($this->dto);
     }
 
+    /**
+     * @covers \Src\Actions\NotFound::__invoke
+     */
     public function testNotFound(): void
     {
         $start = new NotFound($this->connectionService);
         $start($this->dto);
     }
 
+    /**
+     * @covers \Src\Actions\ErrorOutput::_invoke
+     */
     public function testErrorOutput(): void
     {
         $start = new ErrorOutput($this->connectionService);
