@@ -17,10 +17,6 @@ use SimpleTelegramBot\Connection\CurlConnectionService;
 
 class ActionsTest extends TestCase
 {
-    private $dto;
-    private $connectionService;
-    private $userRepository;
-
     protected function setUp(): void {
         BypassFinals::enable();
 
@@ -50,6 +46,7 @@ class ActionsTest extends TestCase
 
         parent::setUp();
     }
+
     private function checkBasicApiUrl(): void
     {
       if(defined('BASIC_API_URL')) define('BASIC_API_URL', 'https://api.telegram.org/bot1edhrto;drthg;l/');
