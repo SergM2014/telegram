@@ -9,6 +9,7 @@ use Src\Models\User;
 use Src\Actions\Save;
 use Src\Actions\Start;
 use DG\BypassFinals;
+use Src\Actions\NotFound;
 use Src\Actions\ErrorOutput;
 use PHPUnit\Framework\TestCase;
 use Src\Repository\UserRepository;
@@ -29,11 +30,11 @@ class ActionsTest extends TestCase
             'Serhii',
             'Me'
         );
-        //define('BASIC_API_URL', 'https://api.telegram.org/bot1edhrto;drthg;l/');
+
         $this->checkBasicApiUrl();
 
         $this->connectionService = $this->getMockBuilder(CurlConnectionService::class)
-            ->setMethods(['withArrayResponse'])
+            ->onlyMethods(['withArrayResponse'])
             ->getMock();
 
         $this->connectionService->expects($this->once())
@@ -70,7 +71,7 @@ class ActionsTest extends TestCase
         $save($this->dto);
     }
 
-    public function testMe():void
+    public function testMe(): void
     {
         $this->userRepository ->expects($this->once())
             ->method('getUserByChatId')
@@ -80,4 +81,15 @@ class ActionsTest extends TestCase
         $me($this->dto);
     }
 
+    public function testNotFound(): void
+    {
+        $start = new NotFound($this->connectionService);
+        $start($this->dto);
+    }
+
+    public function testErrorOutput(): void
+    {
+        $start = new ErrorOutput($this->connectionService);
+        $start($this->dto);
+    }
 }
