@@ -4,6 +4,7 @@ namespace Tests;
 
 use Src\Dto;
 use Monolog\Logger;
+use Src\Actions\Me;
 use Src\Models\User;
 use Src\Actions\Save;
 use Src\Actions\Start;
@@ -42,7 +43,7 @@ class ActionsTest extends TestCase
         $this->errorOutput = $this->createMock(ErrorOutput::class);
 
         $this->userRepository = $this->getMockBuilder(UserRepository::class)
-            ->onlyMethods(['createUser'])
+            ->onlyMethods(['createUser', 'getUserByChatId'])
             ->setConstructorArgs([$this->logger, $this->errorOutput])
             ->getMock();
 
@@ -69,13 +70,14 @@ class ActionsTest extends TestCase
         $save($this->dto);
     }
 
-//    public function testMe():void
-//    {
-//        $this->userRepository ->expects($this->once())
-//            ->method('getUserByChatId');
-//
-//        $save = new Save($this->connectionService,$this->userRepository);
-//        $save($this->dto);
-//    }
+    public function testMe():void
+    {
+        $this->userRepository ->expects($this->once())
+            ->method('getUserByChatId')
+            ->with($this->dto);
+
+        $me = new Me($this->connectionService,$this->userRepository);
+        $me($this->dto);
+    }
 
 }
