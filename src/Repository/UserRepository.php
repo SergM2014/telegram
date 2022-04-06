@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Src\Repository;
 
 use Src\Dto;
-use DI\Container;
 use Src\Models\User;
 use Src\Actions\ErrorOutput;
 use Psr\Log\LoggerInterface;
