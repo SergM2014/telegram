@@ -3,23 +3,17 @@
 namespace Tests;
 
 use Src\Dto;
+use Monolog\Logger;
 use Src\Models\User;
+use Src\Actions\ErrorOutput;
 use PHPUnit\Framework\TestCase;
+use Src\Repository\UserRepository;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class RepositoryTest extends TestCase
 {
     protected function setUp(): void
     {
-//        try{
-//        $this->connection = new \PDO('mysql:dbname='.$_ENV['TEST_NAME_DB'].';host='.$_ENV['TEST_HOST'].'', $_ENV['TEST_USER'],
-//            $_ENV['TEST_PASSWORD'], [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
-//
-//        $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
-//        $this->connection ->exec("SET time_zone = 'Europe/Kiev'");
-//        $this->connection ->exec("SET sql_mode = ''");
-//        } catch(\PDOException $e) {die("Database Connection error:".$e->getMessage());}
-
         $capsule = new Capsule;
         $capsule->addConnection([
             'driver' => 'mysql',
@@ -31,6 +25,7 @@ class RepositoryTest extends TestCase
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
+        User::whereNotNull('id')->delete();
 
         $this->dto = new Dto(
             '/start',
@@ -39,6 +34,8 @@ class RepositoryTest extends TestCase
             'testLastName'
         );
 
+        $this->logger = $this->createMock(Logger::class);
+        $this->errorOutput = $this->createMock(ErrorOutput::class);
 
         parent::setUp();
     }
@@ -48,13 +45,18 @@ class RepositoryTest extends TestCase
      */
     public function testCreateUser(): void
     {
-        $user = User::create(
-            [
-                'chat_id' => $this->dto->chatId,
-                'first_name' => $this->dto->firstName,
-                'last_name' => $this->dto->lastName
-            ]
-        );
+        $user = (new UserRepository($this->logger, $this->errorOutput))->createUser($this->dto);
+
+        $this->assertInstanceOf(User::class, $user);
+    }
+
+    /**
+     * @covers \Src\Repository\UserRepository::getUserByChatId
+     */
+    public function testGetUserByChatId(): void
+    {
+        (new UserRepository($this->logger, $this->errorOutput))->createUser($this->dto);
+        $user = (new UserRepository($this->logger, $this->errorOutput))->getUserByChatId($this->dto);
 
         $this->assertInstanceOf(User::class, $user);
     }
