@@ -5,10 +5,9 @@ namespace Tests;
 use Src\Dto;
 use Monolog\Logger;
 use Src\Actions\Me;
-use Src\Models\User;
+use DG\BypassFinals;
 use Src\Actions\Save;
 use Src\Actions\Start;
-use DG\BypassFinals;
 use Src\Actions\NotFound;
 use Src\Actions\ErrorOutput;
 use PHPUnit\Framework\TestCase;
@@ -27,12 +26,9 @@ class ActionsTest extends TestCase
             'Me'
         );
 
-        $this->checkBasicApiUrl();
-
         $this->connectionService = $this->getMockBuilder(CurlConnectionService::class)
             ->onlyMethods(['withArrayResponse'])
             ->getMock();
-
         $this->connectionService->expects($this->once())
             ->method('withArrayResponse');
 
@@ -45,11 +41,6 @@ class ActionsTest extends TestCase
             ->getMock();
 
         parent::setUp();
-    }
-
-    private function checkBasicApiUrl(): void
-    {
-      if(defined('BASIC_API_URL')) define('BASIC_API_URL', 'https://api.telegram.org/bot1edhrto;drthg;l/');
     }
 
     /**

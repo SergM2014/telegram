@@ -24,4 +24,13 @@
             <directory suffix=".php">src</directory>
         </include>
     </coverage>
+
+    <php>
+        <env name="TEST_DRIVER" value="mysql" />
+        <env name="TEST_HOST" value="localhost" />
+        <env name="TEST_DATA_BASE" value="test_telegram" />
+        <env name="TEST_USER" value="developer" />
+        <env name="TEST_PASSWORD" value="semen" />
+        <const name="BASIC_API_URL" value="https://api.telegram.org/bot1edhrto;drthg;l/" />
+    </php>
 </phpunit>

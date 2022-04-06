@@ -16,11 +16,11 @@ class RepositoryTest extends TestCase
     {
         $capsule = new Capsule;
         $capsule->addConnection([
-            'driver' => 'mysql',
-            'host' => 'localhost',
-            'database' => 'test_telegram',
-            'username' => 'developer',
-            'password' => 'semen'
+            'driver' => $_ENV['TEST_DRIVER'],
+            'host' => $_ENV['TEST_HOST'],
+            'database' => $_ENV['TEST_DATA_BASE'],
+            'username' => $_ENV['TEST_USER'],
+            'password' => $_ENV['TEST_PASSWORD']
         ]);
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
@@ -46,7 +46,6 @@ class RepositoryTest extends TestCase
     public function testCreateUser(): void
     {
         $user = (new UserRepository($this->logger, $this->errorOutput))->createUser($this->dto);
-
         $this->assertInstanceOf(User::class, $user);
     }
 
